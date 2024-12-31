@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- Coding by CodingLab || www.codinglabweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website with Login & Registration Form</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+  </head>
+  <body style="height: 100%; width: 100%; background-color: #190074; background-image: linear-gradient(319deg, #663dff 0%, #51007a 37%, #7a094f 100%);
+  ">
+    <!-- Header -->
+    <header class="header">
+      <nav class="nav">
+        <a href="#" class="nav_logo">BlogLab</a>
+
+        <ul class="nav_items">
+          <li class="nav_item">
+            <a href="/" class="nav_link">Home</a>
+            <a href="/profile" class="nav_link">Profile</a>
+            <a href="/blog" class="nav_link">Blogs</a>
+          </li>
+        </ul>
+
+        <button class="button" id="form-open">Create Post</button>
+      </nav>
+    </header>
+
+    <!-- Home -->
+    <section class="home">
+      <div class="form_container_edit" style="overflow: hidden;">
+      
+        <!-- Login From -->
+          <form action="/upload" method="post" enctype="multipart/form-data">
+              <input type="file" style="margin-left: 30px;" required name="image" />
+            <button class="button-edit" style="color: white;">Upload Pic</button>
+          </form>
+          
+        </div>
+
+        
+
+      </div>
+    
+    
+
+    </section>
+
+
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

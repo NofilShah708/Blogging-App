@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!-- Coding by CodingLab || www.codinglabweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website with Login & Registration Form</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- Unicons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="nav">
+        <a href="#" class="nav_logo">BlogLab</a>
+
+        <ul class="nav_items">
+          <li class="nav_item">
+            <a href="/" class="nav_link">Home</a>
+            <a href="/profile" class="nav_link">Profile</a>
+            <a href="/blog" class="nav_link">Blogs</a>
+          </li>
+        </ul>
+        <% if (userData){ %>
+          <button class="button" onclick="location.href='/logout'" >Logout</button>
+          <% } else { %>
+            <button class="button" id="form-open">Login</button>
+        <% } %>
+      </nav>
+    </header>
+
+    <!-- Home -->
+    <section class="home">
+      <div class="form_container">
+        <i class="uil uil-times form_close"></i>
+        <!-- Login From -->
+        <div class="form login_form">
+          <form action="/login" method="post">
+            <h2>Login</h2>
+            
+
+            <div class="input_box">
+              <input type="email" placeholder="Enter your email" required name="email" />
+              <i class="uil uil-envelope-alt email"></i>
+            </div>
+            <div class="input_box">
+              <input type="password" placeholder="Enter your password" required name="password" />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+
+            <div class="option_field">
+              <span class="checkbox">
+                <input type="checkbox" id="check" />
+                <label for="check">Remember me</label>
+              </span>
+              <a href="#" class="forgot_pw">Forgot password?</a>
+            </div>
+
+            <button class="button">Login Now</button>
+
+            <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
+          </form>
+          
+        </div>
+
+        <!-- Signup From -->
+        <div class="form signup_form">
+          <form action="/create" method="post">
+            <h2>Signup</h2>
+
+            <div class="input_box">
+              <input type="text" placeholder="Enter your username" required name="username" />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+            <div class="input_box">
+              <input type="email" placeholder="Enter your email" required name="email" />
+              <i class="uil uil-envelope-alt email"></i>
+            </div>
+            <div class="input_box">
+              <input type="password" placeholder="Create password" required name="password" />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+            
+
+            <button class="button">Signup Now</button>
+
+            <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
+          </form>
+        </div>
+      </div>
+    <div style="background-color: transparent; border: 2px solid transparent; height: 100%; display: block;">
+      <div style="height: 500px; width: 1200px; color: white; border: 2px solid transparent; margin-top: 100px; margin-left: 20px; display: flex;">
+        <div style="width: 40%; margin-top: 100px; margin-left: 40px;">
+          <h1 style="font-size: 50px;">Make Your <span style="color: rgb(255, 0, 255); font-size: 50px;">Creative</span> Blogs Today!</h1>
+        </div>
+        <div style="width: 50%; margin-left: 80px; height: 350px; margin-top: 40px; border-radius: 5px; overflow: hidden;">
+          <img src="/images/blog image.avif" alt="" srcset="">
+        </div>
+      </div>
+    </div>
+    
+
+    </section>
+
+
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>
