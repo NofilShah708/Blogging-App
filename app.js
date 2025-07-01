@@ -15,7 +15,7 @@ const postModel = require("./models/post");
 
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 // Getting JWT, Cookie Parser, Bcrypt
 
 const upload = require("./config/multerconfig");
