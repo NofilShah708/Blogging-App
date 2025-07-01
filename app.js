@@ -35,6 +35,26 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 // Using CookieParser
 
+// Show login page
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+// Show signup/create account page
+app.get("/create", (req, res) => {
+  res.render("create");
+});
+
+// Handle account creation
+app.post("/create", async (req, res) => {
+  // your existing logic
+});
+
+// Handle login
+app.post("/login", async (req, res) => {
+  // your existing logic
+});
+
 app.get("/", (req, res) => {
   let userData = req.cookies.token;
   res.render("index", { userData });
