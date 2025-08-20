@@ -19,7 +19,6 @@ const bcrypt = require("bcryptjs");
 // Getting JWT, Cookie Parser, Bcrypt
 
 const upload = require("./config/multerconfig");
-const user = require("./models/user");
 // require multer
 
 app.set("view engine", "ejs");
@@ -47,12 +46,45 @@ app.get("/create", (req, res) => {
 
 // Handle account creation
 app.post("/create", async (req, res) => {
-  // your existing logic
+  let { username, email, password } = req.body;
+
+  let user = await userModel.findOne({ email });
+  if (user) return res.redirect("/404");
+
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(password, salt, async (err, hash) => {
+      let createdUser = await userModel.create({
+        username,
+        email,
+        password: hash,
+      });
+      let token = jwt.sign(
+        { email, userid: createdUser._id },
+        process.env.JWT_TOKEN
+      );
+      res.cookie("token", token);
+      res.redirect("/profile");
+    });
+  });
 });
 
 // Handle login
 app.post("/login", async (req, res) => {
-  // your existing logic
+  let { email, password } = req.body;
+
+  let user = await userModel.findOne({ email });
+
+  if (!user) return res.redirect("/404");
+  bcrypt.compare(password, user.password, (err, result) => {
+    if (result) {
+      let token = jwt.sign({ email }, process.env.JWT_TOKEN);
+      res.cookie("token", token);
+
+      res.redirect("/profile");
+    } else {
+      res.redirect("/404");
+    }
+  });
 });
 
 app.get("/", (req, res) => {
@@ -119,47 +151,6 @@ app.post("/update/:id", async (req, res) => {
   res.redirect("/profile");
 });
 
-app.post("/create", async (req, res) => {
-  let { username, email, password } = req.body;
-
-  let user = await userModel.findOne({ email });
-  if (user) return res.redirect("/404");
-
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(password, salt, async (err, hash) => {
-      let createdUser = await userModel.create({
-        username,
-        email,
-        password: hash,
-      });
-      let token = jwt.sign(
-        { email, userid: createdUser._id },
-        process.env.JWT_TOKEN
-      );
-      res.cookie("token", token);
-      res.redirect("/profile");
-    });
-  });
-});
-
-app.post("/login", async (req, res) => {
-  let { email, password } = req.body;
-
-  let user = await userModel.findOne({ email });
-
-  if (!user) return res.redirect("/404");
-  bcrypt.compare(password, user.password, (err, result) => {
-    if (result) {
-      let token = jwt.sign({ email }, process.env.JWT_TOKEN);
-      res.cookie("token", token);
-
-      res.redirect("/profile");
-    } else {
-      res.redirect("/404");
-    }
-  });
-});
-
 app.post("/post", isLoggedIn, async (req, res) => {
   let user = await userModel.findOne({ email: req.user.email });
   if (!user) {
@@ -190,7 +181,8 @@ function isLoggedIn(req, res, next) {
     res.redirect("/404");
   }
 }
-// Middleware
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Server is running on port " + (process.env.PORT || 3000));
+});
 //Server Starting Port
