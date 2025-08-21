@@ -1,7 +1,7 @@
 # Blogging Web App
 # 🚀 Blogging – Social Media Posting Web App
 
-WebOnex
+Blogging WebApp
 > A modern and fully dynamic web application developed for social media posting.
 
 ---
